@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "211933831859",
+    "firebase_url": "https://oncologictest-404c5.firebaseio.com",
+    "project_id": "oncologictest-404c5",
+    "storage_bucket": "oncologictest-404c5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:211933831859:android:82b8157bdc072194",
+        "android_client_info": {
+          "package_name": "uz.tuit.oncologic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "211933831859-5qg258upmavp5lvk45e838sa0q1m0h15.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uz.tuit.oncologic",
+            "certificate_hash": "b8d7908d4c36e2db56c3798f875c4f6058ae26d5"
+          }
+        },
+        {
+          "client_id": "211933831859-1pbjeh201l736tarbpfm1lmu8u1890ip.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwIXqulAKhCkvSEjLR5wdkqHtY2kJj5XA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "211933831859-1pbjeh201l736tarbpfm1lmu8u1890ip.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
