@@ -2,7 +2,9 @@ package uz.tuit.oncologic.ui.main
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import uz.tuit.oncologic.data.AppRepository
 import uz.tuit.oncologic.data.model.QuestionModel
 import uz.tuit.oncologic.data.model.Resource
@@ -12,7 +14,8 @@ class MainViewModel(private val repository: AppRepository): ViewModel() {
 
     var pageNumber = 0
     val questions = MutableLiveData<Resource<List<QuestionModel>>>()
-    val compositeDisposable by lazy { CompositeDisposable() }
+    val requestResult = MutableLiveData<Resource<String>>()
+    private val compositeDisposable by lazy { CompositeDisposable() }
 
     fun getNextQuestions() {
         pageNumber ++
@@ -24,7 +27,19 @@ class MainViewModel(private val repository: AppRepository): ViewModel() {
     }
 
     fun sendResults(results: Map<String, String>) {
-        compositeDisposable.add()
+        compositeDisposable.add(
+            repository.sendResults(results)
+                .observeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe {
+                    requestResult.value = Resource.loading()
+                }
+                .subscribe({
+                    requestResult.value = Resource.success(it)
+                }, {
+                    requestResult.value = Resource.error("Ошибка при отправки ответов. ${it.localizedMessage}")
+                })
+        )
     }
 
     override fun onCleared() {

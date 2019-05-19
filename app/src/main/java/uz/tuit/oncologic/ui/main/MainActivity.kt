@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() {
 
         userId = intent.getStringExtra(AuthActivity.USER_ID)
 
+
+
     }
 
 }

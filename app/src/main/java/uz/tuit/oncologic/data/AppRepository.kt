@@ -89,7 +89,7 @@ class AppRepository(
                             }
                             requestMap["location"] = user["location"].toString()
                             requestMap["birthday"] = user["birthday"].toString()
-                            getResult(requestMap)
+                            sendResults(requestMap)
                             emitter.onSuccess(userId)
                         }
                         false -> emitter.onError(task.exception!!)
@@ -99,6 +99,6 @@ class AppRepository(
     }
 
 
-    fun getResult(params: Map<String, String>) : Single<String> =
+    fun sendResults(params: Map<String, String>) : Single<String> =
             apiService.getResults(params)
 }
