@@ -2,12 +2,10 @@ package uz.tuit.oncologic.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
+import kotlinx.android.synthetic.main.activity_main.*
 import uz.tuit.oncologic.R
-import uz.tuit.oncologic.data.model.QuestionModel
 import uz.tuit.oncologic.ui.auth.AuthActivity
+import uz.tuit.oncologic.ui.custom.CustomQuestionItem
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,7 +17,10 @@ class MainActivity : AppCompatActivity() {
 
         userId = intent.getStringExtra(AuthActivity.USER_ID)
 
-
+        val view = CustomQuestionItem(this)
+        view.questionText.text = "sdasdasdasda"
+        view.questionNumber.text = "13"
+        container.addView(view)
 
     }
 

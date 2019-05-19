@@ -2,18 +2,16 @@ package uz.tuit.oncologic.ui.auth
 
 import android.content.Intent
 import androidx.lifecycle.Observer
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import com.tsongkha.spinnerdatepicker.DatePicker
 import com.tsongkha.spinnerdatepicker.DatePickerDialog
 import com.tsongkha.spinnerdatepicker.SpinnerDatePickerDialogBuilder
 import kotlinx.android.synthetic.main.activity_auth.*
 import org.koin.android.viewmodel.ext.android.viewModel
-import uz.pos.botpro.extensions.visibility
+import uz.tuit.oncologic.extensions.visibility
 import uz.tuit.oncologic.R
-import uz.tuit.oncologic.data.model.QuestionModel
-import uz.tuit.oncologic.data.model.Resource
 import uz.tuit.oncologic.data.model.Status
 import uz.tuit.oncologic.ui.BaseActivity
 import uz.tuit.oncologic.ui.main.MainActivity
@@ -60,9 +58,11 @@ class AuthActivity : BaseActivity(), DatePickerDialog.OnDateSetListener {
                     progressBar?.visibility(true)
                 }
                 Status.SUCCESS -> {
+                    progressBar?.visibility(false)
                     val startTestIntent = Intent(this, MainActivity::class.java)
                     startTestIntent.putExtra(USER_ID, userId)
                     startActivity(startTestIntent)
+                    finish()
                 }
                 Status.ERROR -> {
                     progressBar?.visibility(false)
@@ -88,7 +88,6 @@ class AuthActivity : BaseActivity(), DatePickerDialog.OnDateSetListener {
                 false -> {
                     toast(R.string.please_fill_the_fields)
                 }
-
             }
         }
     }

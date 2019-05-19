@@ -163,7 +163,6 @@
                         android:drawablePadding="@dimen/margin_small"
                         android:textSize="@dimen/standard_text_size"
                         android:textColor="@color/blackish"
-                        android:drawableRight="@drawable/ic_date_range_black_24dp"
                         android:drawableEnd="@drawable/ic_date_range_black_24dp"
                         android:paddingEnd="@dimen/margin_small"
                         android:paddingStart="@dimen/margin_small"
@@ -183,8 +182,9 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginTop="@dimen/margin_big"
                         android:layout_marginBottom="@dimen/margin_big"
-                        android:background="@drawable/background_button"
-                        android:text="@string/start_test"
+                        android:background="@drawable/button_ripple_contained"
+                        android:text="@string/button_text_start_test"
+                        android:textSize="@dimen/button_text_size"
                         android:textColor="@color/white"
                         android:textAllCaps="true"/>
 
