@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">OncologicTest</string>
+    <string name="app_name">Онкологический тест</string>
+    <string name="start_test_now">Пройди тест на рак прямо СЕЙЧАС!</string>
+    <string name="person_hint">Ваше имя, фамилия и отчество</string>
+    <string name="your_gender">Ваш пол</string>
+    <string name="man">мужской</string>
+    <string name="woman">Женский</string>
+    <string name="hint_location">Место жительства в настоящее время</string>
+    <string name="date_format">дд/мм/гггг</string>
+    <string name="birth_date">Дата рождения</string>
+    <string name="start_test">Пройти тест</string>
 </resources>
