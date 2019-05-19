@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -17,6 +17,12 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="NumberPickerStyle">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColorPrimary">@color/colorAccent</item>
+        <item name="android:colorControlNormal" tools:targetApi="lollipop">@color/colorAccent</item>
     </style>
 
 </resources>

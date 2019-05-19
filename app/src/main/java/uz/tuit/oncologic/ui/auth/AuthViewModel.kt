@@ -12,6 +12,7 @@ import uz.tuit.oncologic.data.model.Resource
 class AuthViewModel(private val repository: AppRepository): ViewModel() {
 
     val questionList = MutableLiveData<Resource<List<QuestionModel>>>()
+    val startTestResult = MutableLiveData<Resource<String>>()
     private val compositeDisposable by lazy { CompositeDisposable() }
 
     fun requestTestQuestions(isMan: Boolean) {
@@ -28,5 +29,26 @@ class AuthViewModel(private val repository: AppRepository): ViewModel() {
                     questionList.value = Resource.error("Ошибка при загрузки анкеты. ${it.localizedMessage}")
                 })
         )
+    }
+
+    fun saveUser(user: HashMap<String, Any?>) {
+        compositeDisposable.add(
+            repository.saveUser(user)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe {
+                    startTestResult.value = Resource.loading()
+                }
+                .subscribe({ result ->
+                    startTestResult.value = Resource.success(result)
+                }, {
+                    startTestResult.value = Resource.error("Произошла ошибка. ${it.localizedMessage}")
+                })
+        )
+    }
+
+    override fun onCleared() {
+        compositeDisposable.dispose()
+        super.onCleared()
     }
 }
