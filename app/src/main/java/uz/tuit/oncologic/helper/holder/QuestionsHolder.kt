@@ -1,4 +1,4 @@
-package uz.tuit.oncologic.holder
+package uz.tuit.oncologic.helper.holder
 
 import uz.tuit.oncologic.data.model.QuestionModel
 

@@ -29,7 +29,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true">
 
                 <TextView
                         android:id="@+id/tvWelcome"
@@ -99,6 +100,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/man"
+                            android:textSize="@dimen/standard_text_size"
                             android:textColor="@color/blackish"/>
 
                     <RadioButton
@@ -106,6 +108,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/woman"
+                            android:textSize="@dimen/standard_text_size"
                             android:textColor="@color/blackish"
                             android:layout_marginLeft="@dimen/margin_big"
                             android:layout_marginRight="@dimen/margin_big"/>

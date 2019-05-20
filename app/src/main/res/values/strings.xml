@@ -12,4 +12,5 @@
     <string name="please_fill_the_fields">Пожалуйста, заполните все полей</string>
     <string name="button_text_restart">Начать заново</string>
     <string name="button_text_continue">Продолжить</string>
+    <string name="please_answer_for_all_questions">Пожалуйста, ответьте на все вопросы</string>
 </resources>
