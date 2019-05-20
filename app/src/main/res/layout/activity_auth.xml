@@ -1,187 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         tools:context=".ui.auth.AuthActivity"
-        android:layout_margin="@dimen/margin_small">
+        android:orientation="vertical">
 
     <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            style="?android:attr/progressBarStyleHorizontal"/>
+            android:indeterminate="true"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:visibility="invisible"/>
 
-    <ScrollView
+    <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginRight="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_small">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
-            <TextView
-                    android:id="@+id/tvWelcome"
-                    android:layout_width="0dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:textSize="22sp"
-                    android:text="@string/start_test_now"
-                    android:gravity="center"
-                    android:layout_marginTop="@dimen/margin_standard"
-                    android:layout_marginLeft="@dimen/margin_standard"
-                    android:layout_marginRight="@dimen/margin_standard"
-                    android:textColor="@color/blackish"/>
+                    android:focusableInTouchMode="true">
 
-            <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilPerson"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/tvWelcome"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    android:layout_marginTop="@dimen/margin_standard"
-                    android:layout_marginLeft="@dimen/margin_standard"
-                    android:layout_marginRight="@dimen/margin_standard"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etPerson"
-                        android:layout_width="match_parent"
+                <TextView
+                        android:id="@+id/tvWelcome"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:hint="@string/person_hint"
-                        android:textSize="@dimen/standard_text_size"
-                        android:textColor="@color/blackish"
-                        />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                    android:id="@+id/tvGender"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tilPerson"
-                    android:layout_marginTop="@dimen/margin_standard"
-                    android:layout_marginLeft="@dimen/margin_standard"
-                    android:layout_marginRight="@dimen/margin_standard"
-                    android:textSize="@dimen/standard_text_size"
-                    android:text="@string/your_gender"
-                    android:textColor="@color/blackish"/>
-
-            <RadioGroup
-                    android:id="@+id/rgGender"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvGender"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:layout_marginLeft="@dimen/margin_standard"
-                    android:layout_marginRight="@dimen/margin_standard"
-                    android:orientation="horizontal">
-
-                <RadioButton
-                        android:id="@+id/rbMan"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/man"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:textSize="22sp"
+                        android:text="@string/start_test_now"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/margin_standard"
+                        android:layout_marginLeft="@dimen/margin_standard"
+                        android:layout_marginRight="@dimen/margin_standard"
                         android:textColor="@color/blackish"/>
 
-                <RadioButton
-                        android:id="@+id/rbWoman"
-                        android:layout_width="wrap_content"
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilPerson"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/woman"
-                        android:textColor="@color/blackish"
-                        android:layout_marginLeft="@dimen/margin_big"
-                        android:layout_marginRight="@dimen/margin_big"/>
-            </RadioGroup>
+                        app:layout_constraintTop_toBottomOf="@+id/tvWelcome"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        android:layout_marginTop="@dimen/margin_standard"
+                        android:layout_marginLeft="@dimen/margin_standard"
+                        android:layout_marginRight="@dimen/margin_standard"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-            <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilLocation"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/rgGender"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    android:layout_marginTop="@dimen/margin_standard"
-                    android:layout_marginLeft="@dimen/margin_standard"
-                    android:layout_marginRight="@dimen/margin_standard"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etPerson"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/person_hint"
+                            android:textSize="@dimen/standard_text_size"
+                            android:textColor="@color/blackish"
+                            />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etLocation"
-                        android:layout_width="match_parent"
+                <TextView
+                        android:id="@+id/tvGender"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:hint="@string/hint_location"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tilPerson"
+                        android:layout_marginTop="@dimen/margin_standard"
+                        android:layout_marginLeft="@dimen/margin_standard"
+                        android:layout_marginRight="@dimen/margin_standard"
+                        android:textSize="@dimen/standard_text_size"
+                        android:text="@string/your_gender"
+                        android:textColor="@color/blackish"/>
+
+                <RadioGroup
+                        android:id="@+id/rgGender"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvGender"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:layout_marginLeft="@dimen/margin_standard"
+                        android:layout_marginRight="@dimen/margin_standard"
+                        android:orientation="horizontal">
+
+                    <RadioButton
+                            android:id="@+id/rbMan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/man"
+                            android:textSize="@dimen/standard_text_size"
+                            android:textColor="@color/blackish"/>
+
+                    <RadioButton
+                            android:id="@+id/rbWoman"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/woman"
+                            android:textSize="@dimen/standard_text_size"
+                            android:textColor="@color/blackish"
+                            android:layout_marginLeft="@dimen/margin_big"
+                            android:layout_marginRight="@dimen/margin_big"/>
+                </RadioGroup>
+
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilLocation"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/rgGender"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        android:layout_marginTop="@dimen/margin_standard"
+                        android:layout_marginLeft="@dimen/margin_standard"
+                        android:layout_marginRight="@dimen/margin_standard"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etLocation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/hint_location"
+                            android:textSize="@dimen/standard_text_size"
+                            android:textColor="@color/blackish"
+                            />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                        android:id="@+id/tvDate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tilLocation"
+                        app:layout_constraintRight_toRightOf="parent"
+                        android:layout_marginLeft="@dimen/margin_standard"
+                        android:layout_marginRight="@dimen/margin_standard"
+                        android:layout_marginTop="@dimen/margin_standard"
                         android:textSize="@dimen/standard_text_size"
                         android:textColor="@color/blackish"
-                        />
-            </com.google.android.material.textfield.TextInputLayout>
+                        android:text="@string/birth_date"/>
 
-            <TextView
-                    android:id="@+id/tvDate"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tilLocation"
-                    app:layout_constraintRight_toRightOf="parent"
-                    android:layout_marginLeft="@dimen/margin_standard"
-                    android:layout_marginRight="@dimen/margin_standard"
-                    android:layout_marginTop="@dimen/margin_standard"
-                    android:textSize="@dimen/standard_text_size"
-                    android:textColor="@color/blackish"
-                    android:text="@string/birth_date"/>
+                <TextView
+                        android:id="@+id/tvBirthDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvDate"
+                        android:layout_marginLeft="@dimen/margin_standard"
+                        android:layout_marginRight="@dimen/margin_standard"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:paddingLeft="@dimen/margin_small"
+                        android:paddingRight="@dimen/margin_small"
+                        android:paddingTop="12dp"
+                        android:paddingBottom="12dp"
+                        android:drawablePadding="@dimen/margin_small"
+                        android:textSize="@dimen/standard_text_size"
+                        android:textColor="@color/blackish"
+                        android:drawableEnd="@drawable/ic_date_range_black_24dp"
+                        android:paddingEnd="@dimen/margin_small"
+                        android:paddingStart="@dimen/margin_small"
+                        android:background="@drawable/bordered_background"
+                        android:text="@string/date_format"
+                        android:gravity="center"
+                        android:focusable="true"
+                        android:clickable="true"/>
 
-            <TextView
-                    android:id="@+id/tvBirthDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvDate"
-                    android:layout_marginLeft="@dimen/margin_standard"
-                    android:layout_marginRight="@dimen/margin_standard"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:paddingLeft="@dimen/margin_small"
-                    android:paddingRight="@dimen/margin_small"
-                    android:paddingTop="12dp"
-                    android:paddingBottom="12dp"
-                    android:drawablePadding="@dimen/margin_small"
-                    android:textSize="@dimen/standard_text_size"
-                    android:textColor="@color/blackish"
-                    android:drawableRight="@drawable/ic_date_range_black_24dp"
-                    android:drawableEnd="@drawable/ic_date_range_black_24dp"
-                    android:paddingEnd="@dimen/margin_small"
-                    android:paddingStart="@dimen/margin_small"
-                    android:background="@drawable/bordered_background"
-                    android:text="@string/date_format"
-                    android:gravity="center"
-                    android:focusable="true"
-                    android:clickable="true"/>
+                <Button
+                        android:id="@+id/startButton"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvBirthDate"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginTop="@dimen/margin_big"
+                        android:layout_marginBottom="@dimen/margin_big"
+                        android:background="@drawable/button_ripple_contained"
+                        android:text="@string/button_text_start_test"
+                        android:textSize="@dimen/button_text_size"
+                        android:textColor="@color/white"
+                        android:textAllCaps="true"/>
 
-            <Button
-                    android:id="@+id/startButton"
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvBirthDate"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginTop="@dimen/margin_big"
-                    android:layout_marginBottom="@dimen/margin_big"
-                    android:background="@drawable/background_button"
-                    android:text="@string/start_test"
-                    android:textColor="@color/white"
-                    android:textAllCaps="true"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
-    </ScrollView>
+    </androidx.cardview.widget.CardView>
 
-</androidx.cardview.widget.CardView>
+</LinearLayout>

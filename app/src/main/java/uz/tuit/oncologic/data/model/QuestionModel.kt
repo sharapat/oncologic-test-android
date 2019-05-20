@@ -7,4 +7,9 @@ data class QuestionModel (
     var page: Int = 0,
     var type: String = "",
     var answers: Map<String, String> = HashMap()
-)
+) {
+    companion object {
+        const val TYPE_RADIO = "radio"
+        const val TYPE_TEXT = "text"
+    }
+}

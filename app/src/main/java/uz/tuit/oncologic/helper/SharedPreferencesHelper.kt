@@ -18,4 +18,7 @@ class SharedPreferencesHelper(context: Context) {
     fun getCookies(): Set<String>? =
         preferences.getStringSet(PREF_COOKIES, HashSet<String>())
 
+    fun clearCookies() {
+        preferences.edit().clear().apply()
+    }
 }

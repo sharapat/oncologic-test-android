@@ -17,6 +17,7 @@ import uz.tuit.oncologic.data.network.ApiService
 import uz.tuit.oncologic.data.network.ReceivedCookiesInterceptor
 import uz.tuit.oncologic.helper.SharedPreferencesHelper
 import uz.tuit.oncologic.ui.auth.AuthViewModel
+import uz.tuit.oncologic.ui.main.MainViewModel
 import java.util.concurrent.TimeUnit
 
 private const val baseUrl = "http://xn----8sb4anfhdi.xn--p1ai"
@@ -30,11 +31,12 @@ val networkModule = module {
 }
 
 val repositoryModule = module {
-    single {AppRepository(get(), get())}
+    single {AppRepository(get(), get(), get())}
 }
 
 val viewModelModule = module {
     viewModel { AuthViewModel(get()) }
+    viewModel { MainViewModel(get()) }
 }
 
 val preferencesModule = module {

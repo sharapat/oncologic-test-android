@@ -12,7 +12,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "uz.tuit.oncologic"
-        minSdkVersion 15
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -30,7 +30,6 @@ android {
 ext {
     appcompat_version = '1.0.2'
     constraintlayout_version = '1.1.3'
-    daggerVersion = '2.11'
     lifecycle_version = "1.1.1"
     koin_version = '1.0.2'
     rxandroid_version = '2.1.1'
@@ -41,6 +40,7 @@ ext {
     converter_gson_version = '2.5.0'
     converter_simplexml_version = '2.4.0'
     adapter_rxjava_version = '2.5.0'
+    datepicker_version = '1.0.6'
 }
 
 dependencies {
@@ -72,6 +72,9 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$converter_gson_version"
     implementation "com.squareup.retrofit2:converter-simplexml:$converter_simplexml_version"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$adapter_rxjava_version"
+
+    //DatePicker
+    implementation "com.github.drawers:SpinnerDatePicker:$datepicker_version"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
