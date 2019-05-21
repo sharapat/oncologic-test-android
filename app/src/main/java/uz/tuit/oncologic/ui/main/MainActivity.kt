@@ -14,6 +14,7 @@ import uz.tuit.oncologic.ui.BaseActivity
 import uz.tuit.oncologic.ui.auth.AuthActivity
 import uz.tuit.oncologic.ui.custom.CustomQuestionItem
 import uz.tuit.oncologic.ui.main.list.OnAnswerSelectedListener
+import uz.tuit.oncologic.ui.result.ResultActivity
 
 class MainActivity : BaseActivity(), OnAnswerSelectedListener {
 
@@ -33,7 +34,9 @@ class MainActivity : BaseActivity(), OnAnswerSelectedListener {
             when (it.status) {
                 Status.ERROR -> {
                     if (it.message == "End of questions") {
-                        //show results
+                        val intent = Intent(this, ResultActivity::class.java)
+                        intent.putExtra(ResultActivity.HTML, response)
+                        startActivity(intent)
                     } else {
                         toast(it.message)
                     }

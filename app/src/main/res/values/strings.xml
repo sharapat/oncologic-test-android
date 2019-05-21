@@ -13,4 +13,7 @@
     <string name="button_text_restart">Начать заново</string>
     <string name="button_text_continue">Продолжить</string>
     <string name="please_answer_for_all_questions">Пожалуйста, ответьте на все вопросы</string>
+    <string name="label_activity_result">Результат</string>
+    <string name="result_description">Вы сделали простой и одновременно важный шаг в заботе о своем здоровье! Вы заполнили анкету и получили информацию о том, какие факторы онкологического риска у вас есть. Для того, чтобы исключить возникновение заболевания, необходимо обратиться к своему участковому терапевту и пройти медицинское обследование.</string>
+    <string name="error">Произошла ошибка. Просим прощение за неудобство</string>
 </resources>

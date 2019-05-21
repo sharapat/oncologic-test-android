@@ -39,7 +39,7 @@ class MainViewModel(private val repository: AppRepository): ViewModel() {
                 .subscribe({
                     requestResults.postValue(Resource.success(it))
                 }, {
-                    requestResults.postValue(Resource.error("Ошибка при отправки ответов. ${it.cause}"))
+                    requestResults.postValue(Resource.error("Ошибка при отправки ответов. ${it.localizedMessage}"))
                 })
         )
     }

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".ui.result.ResultActivity">
+
+    <androidx.core.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/restartButton"
+            android:layout_marginBottom="@dimen/margin_standard">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:id="@+id/personInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="26sp"
+                    android:textColor="@color/blackish"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="@dimen/margin_standard"
+                    android:layout_marginTop="@dimen/margin_standard"
+                    android:layout_marginEnd="@dimen/margin_standard"
+                    android:gravity="center"
+                    android:text="Kalabaev Sharapat, 26.12.1996, Tashkent"/>
+
+            <TextView
+                    android:id="@+id/resultTitle1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/personInfo"
+                    android:layout_marginStart="@dimen/margin_standard"
+                    android:layout_marginTop="@dimen/margin_standard"
+                    android:layout_marginEnd="@dimen/margin_standard"
+                    android:textColor="@color/blackish"
+                    android:textSize="22sp"
+                    android:text="Обнаружены факторы риска возникновения онкозаболеваний."
+                    android:gravity="center"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/riskList1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/resultTitle1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                    android:id="@+id/resultTitle2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/riskList1"
+                    android:layout_marginStart="@dimen/margin_standard"
+                    android:layout_marginTop="@dimen/margin_standard"
+                    android:layout_marginEnd="@dimen/margin_standard"
+                    android:textColor="@color/blackish"
+                    android:textSize="22sp"
+                    android:text="Обнаружены факторы риска возникновения онкозаболеваний."
+                    android:gravity="center"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/riskList2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/resultTitle2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                    android:id="@+id/description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/riskList2"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_marginStart="@dimen/margin_standard"
+                    android:layout_marginTop="@dimen/margin_standard"
+                    android:layout_marginEnd="@dimen/margin_standard"
+                    android:layout_marginBottom="@dimen/margin_standard"
+                    android:textSize="@dimen/standard_text_size"
+                    android:textColor="@color/blackish"
+                    android:visibility="gone"
+                    android:text="@string/result_description"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <Button
+            android:id="@+id/restartButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/margin_standard"
+            android:text="@string/button_text_restart"
+            android:textColor="@color/white"
+            android:background="@drawable/button_ripple_contained"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

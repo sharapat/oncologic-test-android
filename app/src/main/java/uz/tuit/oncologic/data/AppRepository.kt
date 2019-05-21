@@ -3,6 +3,9 @@ package uz.tuit.oncologic.data
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.*
 import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import uz.tuit.oncologic.data.model.AnswerModel
 import uz.tuit.oncologic.data.model.QuestionModel
 import uz.tuit.oncologic.data.network.ApiService
@@ -86,6 +89,7 @@ class AppRepository(
     }
 
     fun saveUser(user: HashMap<String, Any?>) : Single<String> {
+        val compositeDisposable = CompositeDisposable()
         return Single.create { emitter ->
 
             val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.US)
@@ -98,6 +102,7 @@ class AppRepository(
                 .addOnCompleteListener { task ->
                     when (task.isSuccessful) {
                         true -> {
+                            sharedPreferencesHelper.setUserName(user["name"].toString())
                             val requestMap: HashMap<String, String> = HashMap()
                             requestMap["person"] = user["name"].toString()
                             requestMap["gender"] = when (user["gender"] as Boolean) {
@@ -106,8 +111,15 @@ class AppRepository(
                             }
                             requestMap["location"] = user["location"].toString()
                             requestMap["birthday"] = user["birthday"].toString()
-
-                            emitter.onSuccess(userId)
+                            compositeDisposable.add(apiService.getResults(requestMap)
+                                .observeOn(Schedulers.io())
+                                .subscribeOn(AndroidSchedulers.mainThread())
+                                .subscribe({
+                                    emitter.onSuccess(userId)
+                                }, {
+                                    emitter.onError(it)
+                                })
+                            )
                         }
                         false -> emitter.onError(task.exception!!)
                     }
@@ -116,6 +128,7 @@ class AppRepository(
     }
 
     fun sendResults(userId: String, answers: Map<String, AnswerModel>) : Single<String> {
+        val compositeDisposable = CompositeDisposable()
         return Single.create { emitter ->
             val batch: WriteBatch = firestore.batch()
             val ref: CollectionReference = firestore.collection("polls/$userId/answers")
@@ -137,8 +150,16 @@ class AppRepository(
                         }
                         params["handler"] = "QuestionaryAnswer"
                         params["module"] = "Questionary"
-                        //apiService.getResults(params)
-                        emitter.onSuccess("hello world")
+                        compositeDisposable.add(
+                            apiService.getResults(params)
+                                .observeOn(Schedulers.io())
+                                .subscribeOn(AndroidSchedulers.mainThread())
+                                .subscribe({
+                                    emitter.onSuccess(it)
+                                }, {
+                                    emitter.onError(it)
+                                })
+                        )
                     }
                     false -> emitter.onError(task.exception!!)
                 }
@@ -147,7 +168,11 @@ class AppRepository(
     }
 
     fun clearCookie() {
-        sharedPreferencesHelper.clearCookies()
+        sharedPreferencesHelper.clear()
+    }
+
+    fun getUsername() : String? {
+        return sharedPreferencesHelper.getUserName()
     }
 
 }
