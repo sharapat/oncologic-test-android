@@ -82,7 +82,7 @@ class AuthActivity : BaseActivity(), DatePickerDialog.OnDateSetListener {
                     userMap["name"] = etPerson.text.toString()
                     userMap["location"] = etLocation.text.toString()
                     userMap["gender"] = rbMan.isChecked
-                    userMap["birthdate"] = tvBirthDate.text.toString()
+                    userMap["birthday"] = tvBirthDate.text.toString()
                     viewModel.saveUser(userMap)
                 }
                 false -> {
@@ -102,13 +102,13 @@ class AuthActivity : BaseActivity(), DatePickerDialog.OnDateSetListener {
                 .showDaySpinner(true)
                 .defaultDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH))
                 .maxDate(3000, 0, 1)
-                .minDate(1996, 11, 26)
+                .minDate(1900, 0, 1)
                 .build()
                 .show()
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
-        tvBirthDate?.text = String.format("%02d/%02d/%04d", dayOfMonth, monthOfYear + 1, year)
+        tvBirthDate?.text = String.format("%02d.%02d.%04d", dayOfMonth, monthOfYear + 1, year)
         isBirthdateSelected = true
     }
 }

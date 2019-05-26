@@ -37,6 +37,7 @@ class MainActivity : BaseActivity(), OnAnswerSelectedListener {
                         val intent = Intent(this, ResultActivity::class.java)
                         intent.putExtra(ResultActivity.HTML, response)
                         startActivity(intent)
+                        finish()
                     } else {
                         toast(it.message)
                     }
@@ -78,7 +79,7 @@ class MainActivity : BaseActivity(), OnAnswerSelectedListener {
         }
 
         restartButton.setOnClickListener {
-            viewModel.restart()
+            viewModel.clearData()
             startActivity(Intent(this, AuthActivity::class.java))
             finish()
         }
@@ -105,5 +106,10 @@ class MainActivity : BaseActivity(), OnAnswerSelectedListener {
             questionsContainer.addView(view)
         }
         svQuestions.scrollY = 0
+    }
+
+    override fun onDestroy() {
+        viewModel.clearData()
+        super.onDestroy()
     }
 }

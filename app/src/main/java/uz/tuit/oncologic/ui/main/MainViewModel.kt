@@ -49,7 +49,7 @@ class MainViewModel(private val repository: AppRepository): ViewModel() {
         super.onCleared()
     }
 
-    fun restart() {
+    fun clearData() {
         repository.clearCookie()
     }
 }

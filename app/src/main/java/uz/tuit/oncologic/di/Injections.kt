@@ -1,8 +1,6 @@
 package uz.tuit.oncologic.di
 
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -10,7 +8,7 @@ import org.koin.android.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import uz.tuit.oncologic.data.AppRepository
 import uz.tuit.oncologic.data.network.AddCookiesInterceptor
 import uz.tuit.oncologic.data.network.ApiService
@@ -22,12 +20,11 @@ import uz.tuit.oncologic.ui.main.MainViewModel
 import uz.tuit.oncologic.ui.result.ResultViewModel
 import java.util.concurrent.TimeUnit
 
-private const val baseUrl = "http://xn----8sb4anfhdi.xn--p1ai"
+private const val baseUrl = "https://test.requestcatcher.com"// "http://xn----8sb4anfhdi.xn--p1ai"
 
 val networkModule = module {
-    single { provideGson() }
     single { provideOkHttpClient(get(), get()) }
-    single { providesRetrofit(get(), get()) }
+    single { providesRetrofit(get()) }
     single { providesApiService(get()) }
     single { FirebaseFirestore.getInstance() }
 }
@@ -52,9 +49,6 @@ val interceptorModule = module {
     single { AddCookiesInterceptor(get()) }
 }
 
-fun provideGson() : Gson =
-    GsonBuilder().setLenient().create()
-
 fun provideOkHttpClient(
     receivedCookiesInterceptor: ReceivedCookiesInterceptor,
     addCookiesInterceptor: AddCookiesInterceptor) : OkHttpClient {
@@ -73,9 +67,9 @@ fun provideOkHttpClient(
         .build()
 }
 
-fun providesRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit =
+fun providesRetrofit(okHttpClient: OkHttpClient): Retrofit =
     Retrofit.Builder()
-        .addConverterFactory(GsonConverterFactory.create(gson))
+        .addConverterFactory(ScalarsConverterFactory.create())
         .baseUrl(baseUrl)
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .client(okHttpClient)

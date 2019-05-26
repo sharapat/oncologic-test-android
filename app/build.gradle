@@ -36,8 +36,8 @@ ext {
     rxjava_version = '2.2.8'
     firebase_version = '19.0.0'
     retrofit_version = '2.5.0'
+    scalar_converter_version = '2.5.0'
     loggin_interceptor_version = '3.8.0'
-    converter_gson_version = '2.5.0'
     converter_simplexml_version = '2.4.0'
     adapter_rxjava_version = '2.5.0'
     datepicker_version = '1.0.6'
@@ -72,9 +72,9 @@ dependencies {
     //retrofit2
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$loggin_interceptor_version"
-    implementation "com.squareup.retrofit2:converter-gson:$converter_gson_version"
     implementation "com.squareup.retrofit2:converter-simplexml:$converter_simplexml_version"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$adapter_rxjava_version"
+    implementation "com.squareup.retrofit2:converter-scalars:$scalar_converter_version"
 
     //DatePicker
     implementation "com.github.drawers:SpinnerDatePicker:$datepicker_version"

@@ -51,4 +51,8 @@ class ResultViewModel(private val repository: AppRepository, private val jsoupHe
             }
         }
     }
+
+    fun clearData() {
+        repository.clearCookie()
+    }
 }

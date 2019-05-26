@@ -1,5 +1,6 @@
 package uz.tuit.oncologic.data.network
 
+import android.util.Log
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
@@ -12,6 +13,7 @@ class AddCookiesInterceptor(private val preferencesHelper: SharedPreferencesHelp
         val preferences = preferencesHelper.getCookies() as HashSet<String>
         preferences.forEach {
             builder.addHeader("Cookie", it)
+            Log.d("Cookie added", it)
         }
 
         return chain.proceed(builder.build())

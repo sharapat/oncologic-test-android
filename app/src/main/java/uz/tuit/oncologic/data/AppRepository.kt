@@ -1,11 +1,14 @@
 package uz.tuit.oncologic.data
 
+import android.util.Log
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.*
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import okhttp3.MediaType
+import okhttp3.RequestBody
 import uz.tuit.oncologic.data.model.AnswerModel
 import uz.tuit.oncologic.data.model.QuestionModel
 import uz.tuit.oncologic.data.network.ApiService
@@ -22,79 +25,50 @@ class AppRepository(
 ) {
 
     fun getQuestions(isMan: Boolean) : Single<List<QuestionModel>> {
-        return Single.create { emitter ->
-            when (isMan) {
-                true -> {
-                    firestore.collection("questions")
-                        .orderBy("id", Query.Direction.ASCENDING)
-                        .get()
-                        .addOnCompleteListener { task ->
-                            when (task.isSuccessful && task.result != null) {
-                                true -> {
-                                    try {
-                                        val result: MutableList<QuestionModel> = arrayListOf()
-                                        task.result!!.documents.forEach { doc ->
-                                            val model = doc.toObject(QuestionModel::class.java)!!
-                                            if (model.type == QuestionModel.TYPE_RADIO) {
-                                                model.answers = model.answers.toList().sortedBy { (_, value) ->
-                                                    value
-                                                }.toMap()
-                                            }
-                                            result.add(model)
-                                        }
-                                        QuestionsHolder.questionList = result
-                                        emitter.onSuccess(result)
-                                    } catch (e: Exception) {
-                                        emitter.onError(e)
-                                    }
+        return when (isMan) {
+            true -> getQuestionsFromCollection("questions")
+            false -> getQuestionsFromCollection("question_woman")
+        }
+    }
+
+    private fun getQuestionsFromCollection(collectionName: String) : Single<List<QuestionModel>> = Single.create { emitter ->
+        firestore.collection(collectionName)
+            .orderBy("id", Query.Direction.ASCENDING)
+            .get()
+            .addOnCompleteListener { task ->
+                when (task.isSuccessful && task.result != null) {
+                    true -> {
+                        try {
+                            val result: MutableList<QuestionModel> = mutableListOf()
+                            task.result!!.documents.forEach { doc ->
+                                val model = doc.toObject(QuestionModel::class.java)!!
+                                if (model.type == QuestionModel.TYPE_RADIO) {
+                                    model.answers = model.answers.toList().sortedBy { (_, value) ->
+                                        value
+                                    }.toMap()
                                 }
-                                false -> {
-                                    emitter.onError(task.exception!!)
-                                }
+                                result.add(model)
                             }
+                            QuestionsHolder.questionList = result
+                            emitter.onSuccess(result)
+                        } catch (e: Exception) {
+                            emitter.onError(e)
                         }
-                }
-                false -> {
-                    firestore.collection("question_woman")
-                        .orderBy("id", Query.Direction.ASCENDING)
-                        .get()
-                        .addOnCompleteListener { task ->
-                            when (task.isSuccessful && task.result != null) {
-                                true -> {
-                                    try {
-                                        val result: MutableList<QuestionModel> = arrayListOf()
-                                        task.result!!.documents.forEach { doc ->
-                                            val model = doc.toObject(QuestionModel::class.java)!!
-                                            if (model.type == QuestionModel.TYPE_RADIO) {
-                                                model.answers = model.answers.toList().sortedBy { (_, value) ->
-                                                    value
-                                                }.toMap()
-                                            }
-                                            result.add(model)
-                                        }
-                                        QuestionsHolder.questionList = result
-                                        emitter.onSuccess(result)
-                                    } catch (e: Exception) {
-                                        emitter.onError(e)
-                                    }
-                                }
-                                false -> {
-                                    emitter.onError(task.exception!!)
-                                }
-                            }
-                        }
+                    }
+                    false -> {
+                        emitter.onError(task.exception!!)
+                    }
                 }
             }
-        }
     }
 
     fun saveUser(user: HashMap<String, Any?>) : Single<String> {
         val compositeDisposable = CompositeDisposable()
         return Single.create { emitter ->
 
-            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.US)
-            val birthdate = Timestamp(sdf.parse(user["birthdate"].toString()))
-            user["birthdate"] = birthdate
+            val sdf = SimpleDateFormat("dd.MM.yyyy", Locale.US)
+            val birthday = Timestamp(sdf.parse(user["birthday"].toString()))
+            user["birthday"] = birthday
 
             val userId = UUID.randomUUID().toString()
             firestore.document("polls/$userId")
@@ -103,17 +77,27 @@ class AppRepository(
                     when (task.isSuccessful) {
                         true -> {
                             sharedPreferencesHelper.setUserName(user["name"].toString())
-                            val requestMap: HashMap<String, String> = HashMap()
-                            requestMap["person"] = user["name"].toString()
-                            requestMap["gender"] = when (user["gender"] as Boolean) {
+                            val requestMap: HashMap<String, RequestBody> = HashMap()
+                            val person = RequestBody.create(MediaType.parse("text/plain"), user["name"].toString())
+                            val gender = RequestBody.create(MediaType.parse("text/plain"), when (user["gender"] as Boolean) {
                                 true -> "man"
                                 false -> "woman"
-                            }
-                            requestMap["location"] = user["location"].toString()
-                            requestMap["birthday"] = user["birthday"].toString()
-                            compositeDisposable.add(apiService.getResults(requestMap)
-                                .observeOn(Schedulers.io())
-                                .subscribeOn(AndroidSchedulers.mainThread())
+                            })
+                            val location = RequestBody.create(MediaType.parse("text/plain"), user["location"].toString())
+                            val birthday1 = RequestBody.create(MediaType.parse("text/plain"), user["birthday"].toString())
+                            val handler = RequestBody.create(MediaType.parse("text/plain"), "QuestionaryAnswer")
+                            val module = RequestBody.create(MediaType.parse("text/plain"), "Questionary")
+                            requestMap["person"] = person
+                            requestMap["gender"] = gender
+                            requestMap["location"] = location
+                            requestMap["birthday"] = birthday1
+                            requestMap["handler"] = handler
+                            requestMap["module"] = module
+
+                            compositeDisposable.add(
+                                apiService.getResults(requestMap)
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe({
                                     emitter.onSuccess(userId)
                                 }, {
@@ -144,16 +128,20 @@ class AppRepository(
             batch.commit().addOnCompleteListener { task ->
                 when (task.isSuccessful) {
                     true -> {
-                        val params: HashMap<String, String> = HashMap()
+                        val params: HashMap<String, RequestBody> = HashMap()
+
                         answers.forEach {
-                            params[it.key] = it.value.value
+                            val data = RequestBody.create(MediaType.parse("text/plain"), it.value.value)
+                            params[it.value.questionName] = data
                         }
-                        params["handler"] = "QuestionaryAnswer"
-                        params["module"] = "Questionary"
+                        val handler = RequestBody.create(MediaType.parse("text/plain"), "QuestionaryAnswer")
+                        val module = RequestBody.create(MediaType.parse("text/plain"), "Questionary")
+                        params["handler"] = handler
+                        params["module"] = module
                         compositeDisposable.add(
                             apiService.getResults(params)
-                                .observeOn(Schedulers.io())
-                                .subscribeOn(AndroidSchedulers.mainThread())
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe({
                                     emitter.onSuccess(it)
                                 }, {
@@ -168,7 +156,7 @@ class AppRepository(
     }
 
     fun clearCookie() {
-        sharedPreferencesHelper.clear()
+     //   sharedPreferencesHelper.clear()
     }
 
     fun getUsername() : String? {

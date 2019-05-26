@@ -1,5 +1,6 @@
 package uz.tuit.oncologic.ui.result
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -12,6 +13,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import uz.tuit.oncologic.R
 import uz.tuit.oncologic.data.model.Status
 import uz.tuit.oncologic.extensions.visibility
+import uz.tuit.oncologic.ui.auth.AuthActivity
 import uz.tuit.oncologic.ui.result.list.RiskListAdapter
 
 class ResultActivity : AppCompatActivity() {
@@ -42,7 +44,7 @@ class ResultActivity : AppCompatActivity() {
                     personInfo.text = getString(R.string.error)
                     description.visibility = View.GONE
                 }
-                Status.SUCCESS -> personInfo.text = it.data
+                Status.SUCCESS -> personInfo.text = intent.getStringExtra(HTML)
                 else -> return@Observer
             }
         })
@@ -89,5 +91,9 @@ class ResultActivity : AppCompatActivity() {
         })
         viewModel.getResults(intent.getStringExtra(HTML))
 
+        restartButton.setOnClickListener {
+            viewModel.clearData()
+            startActivity(Intent(this, AuthActivity::class.java))
+        }
     }
 }
