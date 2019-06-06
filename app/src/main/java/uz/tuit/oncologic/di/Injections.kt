@@ -20,7 +20,7 @@ import uz.tuit.oncologic.ui.main.MainViewModel
 import uz.tuit.oncologic.ui.result.ResultViewModel
 import java.util.concurrent.TimeUnit
 
-private const val baseUrl = "https://test.requestcatcher.com"// "http://xn----8sb4anfhdi.xn--p1ai"
+private const val baseUrl = /*"https://test.requestcatcher.com"*/ "http://xn----8sb4anfhdi.xn--p1ai"
 
 val networkModule = module {
     single { provideOkHttpClient(get(), get()) }
