@@ -143,6 +143,7 @@ class AppRepository(
                                 .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe({
+                                    Log.d("juwap", it)
                                     emitter.onSuccess(it)
                                 }, {
                                     emitter.onError(it)
@@ -156,7 +157,7 @@ class AppRepository(
     }
 
     fun clearCookie() {
-     //   sharedPreferencesHelper.clear()
+        sharedPreferencesHelper.clear()
     }
 
     fun getUsername() : String? {
