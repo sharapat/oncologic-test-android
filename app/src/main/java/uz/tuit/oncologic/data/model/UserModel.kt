@@ -8,5 +8,5 @@ data class UserModel (
     var name: String = "",
     var location: String = "",
     var gender: Boolean = true,
-    var answers: List<String>
+    var answers: List<String> = arrayListOf()
 )

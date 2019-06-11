@@ -34,10 +34,7 @@ ext {
     koin_version = '1.0.2'
     rxandroid_version = '2.1.1'
     rxjava_version = '2.2.8'
-    firebase_version = '19.0.0'
-    retrofit_version = '2.5.0'
-    scalar_converter_version = '2.5.0'
-    loggin_interceptor_version = '3.8.0'
+    firebase_version = '19.0.2'
     converter_simplexml_version = '2.4.0'
     adapter_rxjava_version = '2.5.0'
     datepicker_version = '1.0.6'
@@ -69,13 +66,6 @@ dependencies {
     //rxjava
     implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
 
-    //retrofit2
-    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation "com.squareup.okhttp3:logging-interceptor:$loggin_interceptor_version"
-    implementation "com.squareup.retrofit2:converter-simplexml:$converter_simplexml_version"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$adapter_rxjava_version"
-    implementation "com.squareup.retrofit2:converter-scalars:$scalar_converter_version"
-
     //DatePicker
     implementation "com.github.drawers:SpinnerDatePicker:$datepicker_version"
 
@@ -83,8 +73,8 @@ dependencies {
     implementation "org.jsoup:jsoup:$jsoup_version"
 
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.google.android.material:material:1.0.0'
 }
 

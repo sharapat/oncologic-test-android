@@ -30,6 +30,7 @@ class CustomQuestionItem(private val onAnswerSelectedListener: OnAnswerSelectedL
     private var type: String = ""
     var questionId: Int = 0
     var questionName: String = ""
+    var is_required: Boolean = true
 
     init {
         val layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
@@ -72,7 +73,7 @@ class CustomQuestionItem(private val onAnswerSelectedListener: OnAnswerSelectedL
         textInputEditText.setTextColor(ContextCompat.getColor(context, R.color.blackish))
         textInputEditText.addTextChangedListener(object: TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                onAnswerSelectedListener.onAnswerSelected(questionId, questionName, s.toString(), s.toString())
+                onAnswerSelectedListener.onAnswerSelected(questionId, questionName, s.toString(), s.toString(), is_required)
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -114,7 +115,7 @@ class CustomQuestionItem(private val onAnswerSelectedListener: OnAnswerSelectedL
                     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                         if (position != 0) {
                             val answer = (spinner.selectedItem as AnswerModel)
-                            onAnswerSelectedListener.onAnswerSelected(questionId, questionName, answer.text, answer.value)
+                            onAnswerSelectedListener.onAnswerSelected(questionId, questionName, answer.text, answer.value, is_required)
                         }
                     }
 
@@ -135,7 +136,7 @@ class CustomQuestionItem(private val onAnswerSelectedListener: OnAnswerSelectedL
                     radioButton.setOnCheckedChangeListener { buttonView, isChecked ->
                         if (isChecked) {
                             val answer= (radioButton.tag as Map.Entry<String, String>)
-                            onAnswerSelectedListener.onAnswerSelected(questionId, questionName, answer.key, answer.value)
+                            onAnswerSelectedListener.onAnswerSelected(questionId, questionName, answer.key, answer.value, is_required)
                         }
                     }
                     radioButtonList.add(radioButton)
@@ -143,6 +144,10 @@ class CustomQuestionItem(private val onAnswerSelectedListener: OnAnswerSelectedL
                 }
             }
         }
+    }
+
+    fun setReqired(is_required: Boolean) {
+        this.is_required = is_required
     }
 
     fun setType(type: String) {

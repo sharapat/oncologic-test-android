@@ -36,66 +36,39 @@
                     android:text="Kalabaev Sharapat, 26.12.1996, Tashkent"/>
 
             <TextView
-                    android:id="@+id/resultTitle1"
+                    android:id="@+id/tvResult"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/personInfo"
-                    android:layout_marginStart="@dimen/margin_standard"
-                    android:layout_marginTop="@dimen/margin_standard"
-                    android:layout_marginEnd="@dimen/margin_standard"
-                    android:textColor="@color/blackish"
-                    android:textSize="22sp"
-                    android:text="Обнаружены факторы риска возникновения онкозаболеваний."
-                    android:gravity="center"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/riskList1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/resultTitle1"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
-
-            <TextView
-                    android:id="@+id/resultTitle2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/riskList1"
                     android:layout_marginStart="@dimen/margin_standard"
                     android:layout_marginTop="@dimen/margin_standard"
                     android:layout_marginEnd="@dimen/margin_standard"
+                    android:layout_marginBottom="@dimen/margin_standard"
+                    android:layout_marginLeft="@dimen/margin_standard"
+                    android:layout_marginRight="@dimen/margin_standard"
+                    android:textSize="@dimen/standard_text_size"
                     android:textColor="@color/blackish"
-                    android:textSize="22sp"
-                    android:text="Обнаружены факторы риска возникновения онкозаболеваний."
                     android:gravity="center"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/riskList2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/resultTitle2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
 
             <TextView
                     android:id="@+id/description"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/riskList2"
+                    app:layout_constraintTop_toBottomOf="@+id/tvResult"
                     app:layout_constraintRight_toRightOf="parent"
                     android:layout_marginStart="@dimen/margin_standard"
                     android:layout_marginTop="@dimen/margin_standard"
                     android:layout_marginEnd="@dimen/margin_standard"
                     android:layout_marginBottom="@dimen/margin_standard"
+                    android:layout_marginLeft="@dimen/margin_standard"
+                    android:layout_marginRight="@dimen/margin_standard"
                     android:textSize="@dimen/standard_text_size"
                     android:textColor="@color/blackish"
-                    android:visibility="gone"
-                    android:text="@string/result_description"/>
+                    android:text="@string/result_description"
+                    android:gravity="center"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
