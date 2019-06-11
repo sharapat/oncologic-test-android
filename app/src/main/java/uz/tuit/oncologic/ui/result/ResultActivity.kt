@@ -3,19 +3,13 @@ package uz.tuit.oncologic.ui.result
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_result.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import uz.tuit.oncologic.R
 import uz.tuit.oncologic.data.model.Status
-import uz.tuit.oncologic.extensions.visibility
 import uz.tuit.oncologic.ui.auth.AuthActivity
-import uz.tuit.oncologic.ui.result.list.RiskListAdapter
 
 class ResultActivity : AppCompatActivity() {
 
