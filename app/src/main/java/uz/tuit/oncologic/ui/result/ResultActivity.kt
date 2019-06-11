@@ -3,6 +3,7 @@ package uz.tuit.oncologic.ui.result
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -20,23 +21,18 @@ class ResultActivity : AppCompatActivity() {
 
     companion object {
         const val TAG = "ResultActivity"
-        const val HTML = "html"
+        const val RESULT = "result"
+        const val TOTAL_MAN = 984
+        const val TOTAL_WOMAN = 990
     }
 
-    private val adapter1 = RiskListAdapter()
-    private val adapter2 = RiskListAdapter()
     private val viewModel: ResultViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
 
-        riskList1.adapter = adapter1
-        riskList2.adapter = adapter2
-        riskList1.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        riskList2.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        riskList1.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-        riskList2.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+        personInfo.text = intent.getIntExtra(RESULT, 0).toString()
 
         viewModel.userInfo.observe(this, Observer {
             when (it.status) {
@@ -44,56 +40,25 @@ class ResultActivity : AppCompatActivity() {
                     personInfo.text = getString(R.string.error)
                     description.visibility = View.GONE
                 }
-                Status.SUCCESS -> personInfo.text = intent.getStringExtra(HTML)
-                else -> return@Observer
-            }
-        })
-        viewModel.resultTitle1.observe(this, Observer {
-            when (it.status) {
-                Status.ERROR -> resultTitle1.visibility = View.GONE
                 Status.SUCCESS -> {
-                    resultTitle1.visibility(true)
-                    resultTitle1.text = it.data
-                    description.visibility(true)
+                    personInfo.text = it.data?.name
+                    tvResult.text = String.format("Риск появление онкологических заболевании в вашем организме %.2f %s",
+                        (100.0 * intent.getIntExtra(RESULT, 0) / when(it.data?.gender) {
+                            false -> TOTAL_WOMAN
+                            else -> TOTAL_MAN
+                        }), "%"
+                    )
                 }
                 else -> return@Observer
             }
         })
-        viewModel.resultTitle2.observe(this, Observer {
-            when (it.status) {
-                Status.ERROR -> resultTitle2.visibility = View.GONE
-                Status.SUCCESS -> {
-                    resultTitle2.visibility(true)
-                    resultTitle2.text = it.data
-                }
-                else -> return@Observer
-            }
-        })
-        viewModel.riskList1.observe(this, Observer {
-            when (it.status) {
-                Status.ERROR -> riskList1.visibility = View.GONE
-                Status.SUCCESS -> {
-                    riskList1.visibility(true)
-                    adapter1.setData(it.data!!)
-                }
-                else -> return@Observer
-            }
-        })
-        viewModel.riskList2.observe(this, Observer {
-            when (it.status) {
-                Status.ERROR -> riskList2.visibility = View.GONE
-                Status.SUCCESS -> {
-                    riskList2.visibility(true)
-                    adapter2.setData(it.data!!)
-                }
-                else -> return@Observer
-            }
-        })
-        viewModel.getResults(intent.getStringExtra(HTML))
+
+        viewModel.getResults(intent.getIntExtra(RESULT, 0))
 
         restartButton.setOnClickListener {
             viewModel.clearData()
             startActivity(Intent(this, AuthActivity::class.java))
+            finish()
         }
     }
 }

@@ -12,6 +12,7 @@ data class AnswerModel (
 
     var value: String = "",
     var text: String = "",
+    var is_required: Boolean = true,
     var id: String = ""
 
 ) {

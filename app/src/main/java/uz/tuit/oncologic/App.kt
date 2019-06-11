@@ -14,8 +14,7 @@ class App : Application() {
                 networkModule,
                 repositoryModule,
                 viewModelModule,
-                preferencesModule,
-                interceptorModule)
+                preferencesModule)
         )
     }
 }

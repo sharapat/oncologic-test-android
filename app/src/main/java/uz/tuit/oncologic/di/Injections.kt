@@ -11,21 +11,19 @@ import uz.tuit.oncologic.ui.auth.AuthViewModel
 import uz.tuit.oncologic.ui.main.MainViewModel
 import uz.tuit.oncologic.ui.result.ResultViewModel
 
-private const val baseUrl = /*"https://test.requestcatcher.com"*/ "http://xn----8sb4anfhdi.xn--p1ai"
-
 val networkModule = module {
     single { FirebaseFirestore.getInstance() }
 }
 
 val repositoryModule = module {
-    single {AppRepository(get(), get(), get())}
+    single {AppRepository(get(), get())}
     single {JsoupHelper()}
 }
 
 val viewModelModule = module {
     viewModel { AuthViewModel(get()) }
     viewModel { MainViewModel(get()) }
-    viewModel { ResultViewModel(get(), get()) }
+    viewModel { ResultViewModel(get()) }
 }
 
 val preferencesModule = module {
